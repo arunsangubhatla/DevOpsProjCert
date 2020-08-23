@@ -1,0 +1,11 @@
+/.metadata/
+classes
+*.rar
+*.war
+*.zip
+.project
+.DS_Store
+.classpath
+.settings
+/.metadata/
+/bin
