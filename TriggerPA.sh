@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo /opt/puppetlabs/bin/puppet agent -t
+/opt/puppetlabs/bin/puppet agent -t
