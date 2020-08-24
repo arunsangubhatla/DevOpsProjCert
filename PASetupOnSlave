@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# script to setup puppet agent on slave through jenkins job
 #sudo echo "10.0.2.136  ip-10-0-2-136.ec2.internal">>/etc/hosts #ip & hostname of master
 #sudo echo "10.0.2.43   ip-10-0-2-43.ec2.internal">>/etc/hosts  #ip & hostname of slave(s)
 
