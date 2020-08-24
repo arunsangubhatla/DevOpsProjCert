@@ -5,7 +5,7 @@ pipeline {
         stage('PAConfig'){
             agent {label 'PASlave'}
             steps{
-              git 'https://github.com/arunsangubhatla/DevOpsClassCodes.git'
+              git 'https://github.com/arunsangubhatla/DevOpsProjCert.git'
               sh "sh $WORKSPACE/PASetupOnSlave.sh "
             }
         }
