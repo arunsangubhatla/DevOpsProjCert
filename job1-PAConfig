@@ -1,0 +1,13 @@
+pipeline {
+   
+    agent none
+    stages{
+        stage('PAConfig'){
+            agent {label 'PAslave'}
+            steps{
+              git 'https://github.com/arunsangubhatla/DevOpsClassCodes.git'
+              sh "sh $WORKSPACE/PASetupOnSlave.sh "
+            }
+        }
+     }
+}
