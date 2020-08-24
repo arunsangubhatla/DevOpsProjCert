@@ -1,5 +1,5 @@
 #!/bin/bash
 
-cd /opt/puppetlabs/bin/
-puppet cert list --all
-puppet cert sign --all
+sudo cd /opt/puppetlabs/bin/
+sudo puppet cert list --all
+sudo puppet cert sign --all
