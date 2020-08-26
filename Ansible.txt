@@ -1,0 +1,10 @@
+# Commands to get/install chromium browser 
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+sudo yum install google-chrome-stable_current_x86_64.rpm
+
+# Commands to get/install chrome driver 
+wget https://chromedriver.storage.googleapis.com/2.40/chromedriver_linux64.zip 
+unzip chromedriver_linux64.zip
+
+# Command to install docker on Amazon Linux2
+sudo amazon-linux-extras install docker

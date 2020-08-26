@@ -1,0 +1,24 @@
+FROM ubuntu
+MAINTAINER Arun Sangubhatla <arunsangubhatla@gmail.com>
+
+ADD timezone.sh /timezone.sh
+RUN /timezone.sh
+
+RUN apt-get update
+RUN apt-get install -y nginx php php-fpm php-intl php-mysql php-xdebug
+RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf
+RUN sed -i -e "s/;\?daemonize\s*=\s*yes/daemonize = no/g" /etc/php/fpm/php-fpm.conf
+
+# Nginx config
+RUN rm /etc/nginx/sites-enabled/default
+ADD ./docker/symfony.conf /etc/nginx/sites-available/
+RUN ln -s /etc/nginx/sites-available/symfony.conf /etc/nginx/sites-enabled/symfony.conf
+
+# PHP config
+RUN sed -i -e "s/;\?date.timezone\s*=\s*.*/date.timezone = Europe\/Kiev/g" /etc/php/fpm/php.ini
+
+# Define default command.
+CMD service php-fpm start && nginx
+
+# Expose ports.
+EXPOSE 80
