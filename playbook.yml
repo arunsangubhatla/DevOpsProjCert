@@ -1,0 +1,15 @@
+---
+- hosts: webservers
+  become: true
+  become_user: root
+  tasks:
+  - name: Install httpd
+    yum: name=httpd state=present
+  - name: Start httpd service
+    service: name=httpd state=started
+  - name: Install git
+    yum: name=git state=present
+  - name: Install docker
+    command: amazon-linux-extras install docker
+  - name: download chrome browser & driver
+    script: ansible_chrome_browserNdriver.sh
