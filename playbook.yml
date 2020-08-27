@@ -9,7 +9,7 @@
     service: name=httpd state=started
   - name: Install git
     yum: name=git state=present
-  - name: Install docker
-    command: amazon-linux-extras install docker
-  - name: download chrome browser & driver
-    script: ansible_chrome_browserNdriver.sh
+  - name: Install & start docker
+    script: dockersetup.sh
+  - name: download & install chrome browser & driver
+    script: chromesetup.sh
