@@ -9,7 +9,6 @@ pipeline{
     stages{
         stage('Checkout'){
             agent {label 'PASlave'}
-
             steps{
                 git 'https://github.com/arunsangubhatla/DevOpsClassCodes.git'
             }
@@ -17,22 +16,22 @@ pipeline{
         
         stage('Deploy'){
           agent {label 'PASlave'}
-         
           steps{
               sh "sh docker.sh "
           }
         }
      
         stage('SeliniumTest'){
-		   agent {label 'PASlave'}
-           
+	    agent {label 'PASlave'}
             steps{
               sh 'mvn -f websitetestproj/pom.xml test'
             }
 
             post{
               failure{
-                sh 'docker system prune -a'
+                 sh 'Testing failed do cleanup..."
+                //sh 'sh $WORKSPACE/DevOpsClassCodes/dockercleanup.sh'
+		//sh 'docker system prune -a'
               }
             }
         }
