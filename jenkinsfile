@@ -10,14 +10,21 @@ pipeline{
         stage('Checkout'){
             agent {label 'PASlave'}
             steps{
-                git 'https://github.com/arunsangubhatla/DevOpsClassCodes.git'
+                git 'https://github.com/arunsangubhatla/DevOpsProjCert.git'
             }
         }
         
-        stage('Deploy'){
+	stage('SetupSlaveForTesting'){
+            agent {label 'PASlave'}
+            steps{
+                sh '/etc/ansible/ansible-playbook playbook.yml'
+            }
+        }
+	
+        stage('DeployApplication'){
           agent {label 'PASlave'}
           steps{
-              sh "sh docker.sh "
+              sh 'sh docker.sh '
           }
         }
      
@@ -29,9 +36,8 @@ pipeline{
 
             post{
               failure{
-                 sh 'Testing failed do cleanup..."
-                //sh 'sh $WORKSPACE/DevOpsClassCodes/dockercleanup.sh'
-		//sh 'docker system prune -a'
+                 //Testing failed - delete docker container
+                sh 'sh dockercleanup.sh'
               }
             }
         }
