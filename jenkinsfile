@@ -1,13 +1,41 @@
-pipeline {
+pipeline{
    
+    tools {
+      jdk 'myjava'
+      maven 'mymaven'
+    }
+    
     agent none
     stages{
-        stage('PAConfig'){
+        stage('Checkout'){
             agent {label 'PASlave'}
+
             steps{
-              git 'https://github.com/arunsangubhatla/DevOpsProjCert.git'
-              sh "sh $WORKSPACE/PASetupOnSlave.sh "
+                git 'https://github.com/arunsangubhatla/DevOpsClassCodes.git'
             }
         }
-     }
+        
+        stage('Deploy'){
+          agent {label 'PASlave'}
+         
+          steps{
+              sh "sh docker.sh "
+          }
+        }
+     
+        stage('SeliniumTest'){
+		   agent {label 'PASlave'}
+           
+            steps{
+              sh 'mvn -f websitetestproj/pom.xml test'
+            }
+
+            post{
+              failure{
+                sh 'docker stop devopscert:$BUILD_NUMBER'
+                sh 'docker rm devopscert:$BUILD_NUMBER'
+              }
+            }
+        }
+    }
 }
