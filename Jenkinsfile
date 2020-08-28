@@ -15,9 +15,10 @@ pipeline{
         }
         
 	stage('SetupSlaveForTesting'){
-            agent {label 'PASlave'}
+	    agent any
             steps{
-                sh '/etc/ansible/ansible-playbook /etc/ansible/playbook.yml'
+		git 'https://github.com/arunsangubhatla/DevOpsProjCert.git'
+                sh 'ansible-playbook /etc/ansible/playbook.yml'
             }
         }
 	
