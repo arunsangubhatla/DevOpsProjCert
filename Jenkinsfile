@@ -15,10 +15,10 @@ pipeline{
         }
         
 	stage('SetupSlaveForTesting'){
-	    agent any
+	    agent {label 'master'}
             steps{
 		git 'https://github.com/arunsangubhatla/DevOpsProjCert.git'
-                sh 'ansible-playbook /etc/ansible/playbook.yml'
+                //sh 'sudo ansible-playbook /etc/ansible/playbook.yml'
             }
         }
 	
