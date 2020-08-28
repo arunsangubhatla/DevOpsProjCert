@@ -17,7 +17,7 @@ pipeline{
 	stage('SetupSlaveForTesting'){
             agent {label 'PASlave'}
             steps{
-                sh 'ansible-playbook /etc/ansible/playbook.yml'
+                sh 'sudo ansible-playbook /etc/ansible/playbook.yml'
             }
         }
 	
