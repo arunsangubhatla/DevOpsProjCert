@@ -22,7 +22,7 @@ public class tc1 {
 		  chromeOptions.addArguments("--headless");
 		  driver.manage().window().maximize();
 		  driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
-		  driver.get("http://localhost/index.php/");	
+		  driver.get("http://localhost:81/index.php/");	
 		}
 		
 	  @Test
