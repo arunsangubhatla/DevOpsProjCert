@@ -3,6 +3,7 @@
 #rm -rf jenkins-docker
 #mkdir jenkins-docker
 #cd jenkins-docker
+rm -f dockerfile
 touch dockerfile
 cat <<EOT>> dockerfile
 FROM devopsedu/webapp
