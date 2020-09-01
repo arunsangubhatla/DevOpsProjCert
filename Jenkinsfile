@@ -19,7 +19,7 @@ pipeline{
             steps{
 		git 'https://github.com/arunsangubhatla/DevOpsProjCert.git'
 		    sh 'whoami'
-                sh 'sudo ansible-playbook /etc/ansible/playbook.yml'
+                sh 'ansible-playbook /etc/ansible/playbook.yml'
             }
         }
 	
