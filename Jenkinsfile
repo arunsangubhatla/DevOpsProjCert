@@ -18,6 +18,7 @@ pipeline{
 	    agent {label 'master'}
             steps{
 		git 'https://github.com/arunsangubhatla/DevOpsProjCert.git'
+		    sh 'whoami'
                 sh 'sudo ansible-playbook /etc/ansible/playbook.yml'
             }
         }
