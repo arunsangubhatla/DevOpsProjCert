@@ -5,7 +5,9 @@ pipeline{
       maven 'mymaven'
     }
     
+    agent none
     stages{
+        agent any
         stage('Checkout'){
             steps{
                 git 'https://github.com/arunsangubhatla/DevOpsProjCert.git'
@@ -13,6 +15,7 @@ pipeline{
         }
         
         stage('SetupSlaveForTesting'){
+        agent any
             steps{
               git 'https://github.com/arunsangubhatla/DevOpsProjCert.git'
               sh 'whoami'
@@ -21,12 +24,14 @@ pipeline{
         }
 
         stage('DeployApplication'){
+        agent any
           steps{
               sh 'sh docker.sh '
           }
         }
 
         stage('SeliniumTest'){
+        agent any
           steps{
             sh 'mvn -f websitetestproj/pom.xml test'
           }
