@@ -1,0 +1,42 @@
+pipeline{
+   
+    tools {
+      jdk 'myjava'
+      maven 'mymaven'
+    }
+    
+    stages{
+        stage('Checkout'){
+            steps{
+                git 'https://github.com/arunsangubhatla/DevOpsProjCert.git'
+            }
+        }
+        
+        stage('SetupSlaveForTesting'){
+            steps{
+              git 'https://github.com/arunsangubhatla/DevOpsProjCert.git'
+              sh 'whoami'
+              sh 'ansible-playbook /etc/ansible/playbook.yml'
+            }
+        }
+
+        stage('DeployApplication'){
+          steps{
+              sh 'sh docker.sh '
+          }
+        }
+
+        stage('SeliniumTest'){
+          steps{
+            sh 'mvn -f websitetestproj/pom.xml test'
+          }
+
+          post{
+            failure{
+               //Testing failed - delete docker container
+              sh 'sh dockercleanup.sh'
+            }
+          }
+        }
+    }
+}
